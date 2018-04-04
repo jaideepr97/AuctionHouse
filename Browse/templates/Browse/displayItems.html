@@ -1,0 +1,174 @@
+{% extends 'Browse/bootstrap.html'%}
+{% block item_active%}active{% endblock%}
+
+{% block body%}
+{{ request.user.username }}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<title>Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'Index/w3.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'Index/font.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'Index/font2.css' %}">
+<style>
+::-webkit-scrollbar {
+    display: none;
+}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+.ui-datepicker { font-size:8pt !important}
+body, html {
+    height: 100%;
+    color: black;
+    line-height: 1.8;
+}
+
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    opacity: 1;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+    background-image: url('image.jpg');
+    min-height: 40%;
+}
+
+/* Second image (Portfolio) */
+.bgimg-2 {
+    background-image: url("img_parallax2.jpg");
+    min-height: 400px;
+}
+
+/* Third image (Contact) */
+.bgimg-3 {
+    background-image: url("img_parallax3.jpg");
+    min-height: 400px;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+#googleMap {
+    width: 100%;
+    height: 400px;
+    -webkit-filter: grayscale(90%);
+    filter: grayscale(90%);
+}
+
+/* Turn off parallax scrolling for tablets and mobiles */
+@media only screen and (max-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+</style>
+<body>
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <ul class="w3-navbar" id="myNavbar">
+            <li class="w3-hide-small w3-right">
+            <a href="{% url 'Login:logoutView' %}" class="w3-padding-large w3-red w3-hover-text-black">LOG OUT</a>
+            <li class="w3-hide-small w3-right">
+            <a href="" class="w3-padding-large w3-white w3-hover-text-black"></a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- First Parallax Image with Logo Text -->
+    <div class="bgimg-1 w3-opacity w3-display-container">
+        <div class="w3-display-middle" style="white-space:nowrap;">
+            <span class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity"><span class="w3-hide-small">GALLERY</span> </span>
+        </div>
+    </div>
+
+
+    <!-- Container (Section) -->
+    <div class="w3-row w3-padding-32 w3-section">
+        <div class="w3-col m2 w3-container">
+            <ul class="w3-card-16 w3-ul w3-hoverable">
+                <p>
+                <li class="w3-padding-xlarge w3-center"><a href="{% url 'Index:homepage' %}" style="text-decoration: none">My HomePage</a></li>
+                <li class="w3-padding-xlarge w3-center w3-deep-purple"><a href="{% url 'Browse:displayItems' %}" style="text-decoration: none">Gallery</a>
+                <li class="w3-padding-xlarge w3-center"><a href="" style="text-decoration: none">Bid Antiques</a></li>
+
+
+                <li class="w3-padding-xlarge w3-center"><a href="{% url 'UploadItems:UploadItems' %}" style="text-decoration: none">Upload Antiques</a></li>
+
+                </p>
+            </ul>
+        </div>
+        <div class="w3-col m8 w3-container">
+            <div class=" container-fluid">
+
+                <!-- Albums -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3> Items on Sale</h3>
+                    </div>
+                    {% if all_items %}
+                    {% for item in all_items %}
+                    <div class="col-sm-4 col-lg-2">
+                        <div class="thumbnail">
+                            <a href="{% url 'Browse:details' item.item_id %}">
+                                <img src="{{ item.item_logo.url }}" class="img-responsive">
+                            </a>
+                            <div class="caption">
+                                <h2>{{item.item_name}}</h2>
+                                <h4>{{item.cur_highest_bid}}</h4>
+
+                                <!-- View Details -->
+                                <a href="{% url 'Browse:details' item.item_id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+                    {% endfor %}
+                    {% if all_items.has_other_pages %}
+                    <ul class="pagination">
+                    {% if all_items.has_previous %}
+                        <li><a href="?page={{ all_items.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in all_items.paginator.page_range %}
+                        {% if all_items.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if all_items.has_next %}
+                        <li><a href="?page={{ all_items.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                    {% else %}
+                    <h2> Sorry no Items to Display.</h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message }}")
+            {% endfor %}
+
+        </script>
+    {% endif %}
+</body>
+</html>
+
+{% endblock %}

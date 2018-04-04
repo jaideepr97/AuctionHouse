@@ -1,0 +1,67 @@
+{% extends 'Index/dashboard.html' %}
+{% block body %}
+
+        <div class="w3-col m8 w3-container">
+            <div class=" container-fluid">
+
+                <!-- Albums -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3> Items Bought by you</h3>
+                    </div>
+                    {% if items %}
+                    {% for item in items %}
+                    <div class="col-sm-4 col-lg-2">
+                        <div class="thumbnail">
+                            <a href="{% url 'Browse:bought_details' item.item_id %}">
+                                <img src="{{ item.item_logo.url }}" class="img-responsive">
+                            </a>
+                            <div class="caption">
+                                <h2>{{item.item_name}}</h2>
+                                <h4>{{item.cur_highest_bid}}</h4>
+
+                                <!-- View Details -->
+                                <a href="{% url 'Browse:bought_details' item.item_id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+                    {% endfor %}
+                    {% if all_items.has_other_pages %}
+                    <ul class="pagination">
+                    {% if all_items.has_previous %}
+                        <li><a href="?page={{ all_items.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in all_items.paginator.page_range %}
+                        {% if all_items.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if all_items.has_next %}
+                        <li><a href="?page={{ all_items.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                    {% else %}
+                    <h2> Sorry no Items to Display.</h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message }}")
+            {% endfor %}
+
+        </script>
+    {% endif %}
+{% endblock %}

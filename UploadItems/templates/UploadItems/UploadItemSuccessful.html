@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body{background: skyblue; font-family: verdana; color: #fff; padding: 30px;}
+      h1{font-size: 48px; text-transform: uppercase; letter-spacing: normal;text-align: center;}
+      p{font-size: 16px; text-align: center;}
+    </style>
+  </head>
+  <body>
+    {% load staticfiles %}
+    <h1> YOU HAVE SUCCESSFULLY UPLOADED AN ITEM! </h1>
+    {% if user_name %}
+    <h1> {{ user_name }}, YOU HAVE SUCCESSFULLY UPLOADED AN ITEM!<h1>
+    {% endif %}
+  </body>
+</html>

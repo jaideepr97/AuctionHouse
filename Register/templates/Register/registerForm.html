@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <center>
+                    <form class="form-horizontal" action="" method="post">
+                        {% csrf_token %}
+                        <p align="center"> First Name : <input type="text" name="first_name" placeholder="Name" style="width:60%" required><br>
+                        </p>
+                        <p align="center"> User Name : <input type="text" name="username" placeholder="User Name" style="width:60%" required><br>
+                        </p>
+                        <p align="center"> Password : &nbsp <input type="password" name="password" placeholder="Password" style="width:60%" required><br>
+                        </p>
+		                <p align="center"> Email :&nbsp &nbsp &nbsp &nbsp &nbsp<input type="text" name="email" placeholder="Email" style="width:60%" required><br>
+                        </p>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <center>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                </center>
+                            </div>
+                        </div>
+                    </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

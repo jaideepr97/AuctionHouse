@@ -1,0 +1,6 @@
+{% for field in form %}
+    <label class="control-label col-sm-2">
+    {{ field.label_tag}}
+    </label>
+    <div class="col-sm-6">{{ field }}</div>
+{% endfor %}

@@ -1,0 +1,39 @@
+{% load staticfiles %}
+
+{% if cur_item %}
+	<ul>
+
+        <ul>
+            <img src="{{ cur_item.item_logo.url }}" class="img-responsive">
+            <li>Name: {{cur_item.item_name}}</li>
+            <li>Item ID: {{cur_item.item_id}}</li>
+            <li>Seller: {{cur_item.seller}}</li>
+            <li>Created on: {{cur_item.created_on}}</li>
+            <li>Current highest bidder: {{cur_item.cur_highest_bidder}}</li>
+            <li>Current highest bid: {{cur_item.cur_highest_bid}}</li>
+            <li>Minimum price: {{cur_item.min_price}}</li>
+            <li>Buy now: {{cur_item.buy_now_price}}</li>
+
+        </ul>
+
+        <form action="{% url 'Browse:update' cur_item.item_id %}" method="POST">
+        {% csrf_token %}
+            <input type="text" name="bid_value">
+            <button type="submit">SUBMIT BID</button>
+        </form>
+
+    </ul>
+
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message }}")
+            {% endfor %}
+
+        </script>
+    {% endif %}
+
+{% else %}
+    <h1>YOU DON'T HAVE ANY ITEMS</h1>
+{% endif %}
+
