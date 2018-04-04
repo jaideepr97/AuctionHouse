@@ -1,21 +1,26 @@
+{% extends 'Index/dashboard.html' %}
+{% block body %}
+
 {% load staticfiles %}
 
 {% if cur_item %}
-	<ul>
 
+    <div class="w3-col m8 w3-container">
         <ul>
-            <img src="{{ cur_item.item_logo.url }}" class="img-responsive">
-            <li>Name: {{cur_item.item_name}}</li>
-            <li>Item ID: {{cur_item.item_id}}</li>
-            <li>Item desc: {{cur_item.item_desc}}</li>
-            <li>Seller: <a href="{% url 'Profile:profilepage' cur_item.seller.username %}" >{{cur_item.seller}}</a></li>
-            <li>sale price: {{cur_item.sell_price}}</li>
-            <li>Buyer: {{cur_item.buyer}}</li>
 
+            <ul>
+                <img src="{{ cur_item.item_logo.url }}" class="img-responsive">
+                <li>Name: {{cur_item.item_name}}</li>
+                <li>Item ID: {{cur_item.item_id}}</li>
+                <li>Item desc: {{cur_item.item_desc}}</li>
+                <li>Seller: <a href="{% url 'Profile:profilepage' cur_item.seller.username %}" >{{cur_item.seller}}</a></li>
+                <li>sale price: {{cur_item.sell_price}}</li>
+                <li>Buyer: {{cur_item.buyer}}</li>
+
+            </ul>
         </ul>
-	</ul>
-
+    </div>
 {% else %}
     <h1>YOU DON'T HAVE ANY ITEMS</h1>
 {% endif %}
-
+{% endblock %}

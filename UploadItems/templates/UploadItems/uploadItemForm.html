@@ -1,6 +1,6 @@
 
 {#% extends 'Browse/bootstrap.html' %#}
-{#% block item_active %#}{{ request.user.username }}{#% endblock %#}
+{#% block item_active %#}<!--{{ request.user.username }}-->{#% endblock %#}
 {#% block body %#}
 
 
@@ -96,10 +96,12 @@ body, html {
         <div class="w3-col m2 w3-container">
             <ul class="w3-card-16 w3-ul w3-hoverable">
                 <p>
-                <li class="w3-padding-xlarge w3-center"><a href="{% url 'Index:homepage' %}" style="text-decoration: none">My HomePage</a></li>
-                <li class="w3-padding-xlarge w3-center"><a href="{% url 'Browse:displayItems' %}" style="text-decoration: none">Gallery</a>
-                <li class="w3-padding-xlarge w3-center"><a href="" style="text-decoration: none">Bid Antiques</a></li>
-                <li class="w3-padding-xlarge w3-center w3-deep-purple"><a href="{% url 'UploadItems:UploadItems' %}" style="text-decoration: none">Upload Antiques</a></li>
+                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Index:dashboard' %}" style="text-decoration: none">My HomePage</a></li>
+                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Browse:displayItems' %}" style="text-decoration: none">Gallery</a></li>
+                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showBids' %}" style="text-decoration: none">My Bids</a></li>
+                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showBought' %}" style="text-decoration: none">My Bought</a></li>
+                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showListings' %}" style="text-decoration: none">My Listings</a></li>
+                    <li class="w3-padding-xlarge w3-center w3-deep-purple"><a href="{% url 'UploadItems:UploadItems' %}" style="text-decoration: none">Upload Items</a></li>
                 </p>
             </ul>
         </div>

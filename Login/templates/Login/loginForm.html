@@ -1,15 +1,71 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'Index/w3.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Index/font.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Index/font2.css' %}">
     <style>
-        /*body{background: skyblue; font-family: verdana; color: #fff; padding: 30px;}*/
-    </style>
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+        .ui-datepicker { font-size:8pt !important}
+        body, html {
+            height: 100%;
+            color: #777;
+            line-height: 1.8;
+        }
+
+        /* Create a Parallax Effect */
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            opacity: 1;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* First image (Logo. Full height) */
+        .bgimg-1 {
+            background-image: url('image.jpg');
+            min-height: 30%;
+        }
+
+        /* Second image (Portfolio) */
+        .bgimg-2 {
+            background-image: url("img_parallax2.jpg");
+            min-height: 400px;
+        }
+
+        /* Third image (Contact) */
+        .bgimg-3 {
+            background-image: url("img_parallax3.jpg");
+            min-height: 400px;
+        }
+
+        .w3-wide {letter-spacing: 10px;}
+        .w3-hover-opacity {cursor: pointer;}
+
+        #googleMap {
+            width: 100%;
+            height: 400px;
+            -webkit-filter: grayscale(90%);
+            filter: grayscale(90%);
+        }
+
+        /* Turn off parallax scrolling for tablets and mobiles */
+        @media only screen and (max-width: 1024px) {
+            .bgimg-1, .bgimg-2, .bgimg-3 {
+                background-attachment: scroll;
+            }
+        }
+       </style>
+
 </head>
 <body>
-<div class="container-fluid">
+<!--div class="container-fluid">
 
     <div class="row">
         <div class="col-sm-12 col-md-7">
@@ -31,6 +87,47 @@
             </div>
         </div>
     </div>
+</div-->
+
+<div class="w3-top">
+  <ul class="w3-navbar w3-text-black" id="myNavbar">
+    <li><a href="{% url 'Index:homepage' %}" class="w3-padding-large">HOME</a></li>
+    <li><a href="{% url 'Register:registerView' %}" class="w3-padding-large">SIGN UP</a></li>
+  </ul>
 </div>
+
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-opacity w3-display-container">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity">LOG<span class="w3-hide-small">IN</span> </span>
+  </div>
+</div>
+
+
+<!-- Container (Contact Section) -->
+<div class="w3-content w3-container w3-padding-64">
+  <div class="w3-row w3-padding-32 w3-section">
+    <div class="w3-center m8 w3-container w3-section">
+
+      <div class="w3-large w3-margin-bottom">
+
+      	<form name ="login" method="post" action="">
+            {% csrf_token %}
+        <p><input class="w3-input-group w3-input w3-animate-input" type="text" name="username" placeholder="User Name" required><br>
+        </p>
+
+
+        <p><input class="w3-input-group w3-input w3-animate-input" type="password" name="password" placeholder="Password" required><br>
+
+        </p>
+
+         </div>
+
+      <input type="submit" value="Submit" class="w3-btn w3-section w3-center"></input>
+      </form>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

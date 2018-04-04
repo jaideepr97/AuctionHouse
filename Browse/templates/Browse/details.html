@@ -1,29 +1,43 @@
+{% extends 'Index/dashboard.html' %}
+{% block heading %}
+    <div class="bgimg-1 w3-opacity w3-display-container">
+      <div class="w3-display-middle" style="white-space:nowrap;">
+        <span class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity">ANTIQUE  DETAILS</span>
+      </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+
 {% load staticfiles %}
 
 {% if cur_item %}
-	<ul>
 
+    <div class="w3-col m8 w3-container">
         <ul>
-            <img src="{{ cur_item.item_logo.url }}" class="img-responsive">
-            <li>Name: {{cur_item.item_name}}</li>
-            <li>Item ID: {{cur_item.item_id}}</li>
-            <li>Seller: {{cur_item.seller}}</li>
-            <li>Created on: {{cur_item.created_on}}</li>
-            <li>Current highest bidder: {{cur_item.cur_highest_bidder}}</li>
-            <li>Current highest bid: {{cur_item.cur_highest_bid}}</li>
-            <li>Minimum price: {{cur_item.min_price}}</li>
-            <li>Buy now: {{cur_item.buy_now_price}}</li>
+
+            <ul>
+                <img src="{{ cur_item.item_logo.url }}" class="img-responsive">
+                <li>Name: {{cur_item.item_name}}</li>
+                <li>Item ID: {{cur_item.item_id}}</li>
+                <li>Seller: {{cur_item.seller}}</li>
+                <li>Created on: {{cur_item.created_on}}</li>
+                <li>Current highest bidder: {{cur_item.cur_highest_bidder}}</li>
+                <li>Current highest bid: {{cur_item.cur_highest_bid}}</li>
+                <li>Minimum price: {{cur_item.min_price}}</li>
+                <li>Buy now: {{cur_item.buy_now_price}}</li>
+
+            </ul>
+
+            <form action="{% url 'Browse:update' cur_item.item_id %}" method="POST">
+            {% csrf_token %}
+                <input type="text" name="bid_value">
+                <button type="submit">SUBMIT BID</button>
+            </form>
 
         </ul>
-
-        <form action="{% url 'Browse:update' cur_item.item_id %}" method="POST">
-        {% csrf_token %}
-            <input type="text" name="bid_value">
-            <button type="submit">SUBMIT BID</button>
-        </form>
-
-    </ul>
-
+    </div>
     {% if messages %}
         <script>
             {% for message in messages %}
@@ -37,3 +51,4 @@
     <h1>YOU DON'T HAVE ANY ITEMS</h1>
 {% endif %}
 
+{% endblock %}
