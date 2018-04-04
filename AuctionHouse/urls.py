@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^Browse/', include('Browse.urls')),
     url(r'^UploadItems/', include('UploadItems.urls')),
     url(r'^ShowBids/', include('Bids.urls')),
-    #url(r'^Profile/', include('Profile.urls')),
+    url(r'^Profile/', include('Profile.urls')),
 ]

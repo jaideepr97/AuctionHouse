@@ -8,7 +8,7 @@
             <li>Name: {{cur_item.item_name}}</li>
             <li>Item ID: {{cur_item.item_id}}</li>
             <li>Item desc: {{cur_item.item_desc}}</li>
-            <li>Seller: {{cur_item.seller}}</li>
+            <li>Seller: <a href="{% url 'Profile:profilepage' cur_item.seller.username %}" >{{cur_item.seller}}</a></li>
             <li>sale price: {{cur_item.sell_price}}</li>
             <li>Buyer: {{cur_item.buyer}}</li>
 
