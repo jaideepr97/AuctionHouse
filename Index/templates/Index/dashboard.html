@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'Index/w3.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'Index/font.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'Index/font2.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'Browse/imgsize.css' %}">
 
 <style>
 ::-webkit-scrollbar {
@@ -69,6 +70,9 @@ body, html {
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <ul class="w3-navbar" id="myNavbar">
+    <li><a href="#" class="w3-padding-large"><font color="black"><b>{{username}}</b></font></a></li>
+    <li><a href="#" class="w3-padding-large"><font color="black"><b>{{credits}}</b></font></a></li>
+
     <li class="w3-hide-small w3-right">
       <a href="{% url 'Login:logoutView' %}" class="w3-padding-large w3-red w3-hover-text-black">LOG OUT</a>
     <li class="w3-hide-small w3-right">
@@ -91,7 +95,7 @@ body, html {
   <div class="w3-col m2 w3-container">
     <ul class="w3-card-16 w3-ul w3-hoverable">
       <p>
-        <li class="w3-padding-xlarge w3-center w3-deep-purple"><a href="{% url 'Index:dashboard' %}" style="text-decoration: none">My HomePage</a></li>
+        <li class="w3-padding-xlarge w3-center"><a href="{% url 'Index:dashboard' %}" style="text-decoration: none">My HomePage</a></li>
         <li class="w3-padding-xlarge w3-center"><a href="{% url 'Browse:displayItems' %}" style="text-decoration: none">Gallery</a></li>
         <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showBids' %}" style="text-decoration: none">My Bids</a></li>
         <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showBought' %}" style="text-decoration: none">My Bought</a></li>

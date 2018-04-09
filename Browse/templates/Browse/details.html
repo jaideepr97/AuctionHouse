@@ -13,8 +13,32 @@
 {% load staticfiles %}
 
 {% if cur_item %}
+<div class="w3-col m2 w3-container w3-section">
+    </div>
+  <div class="w3-col m4 w3-container w3-section">
+<ul class="w3-card-16 w3-ul">
 
-    <div class="w3-col m8 w3-container">
+
+  <li class="w3-padding-large">
+    <h3><i>Details of Items</i></h3>
+  </li>
+  <li class="w3-padding-large">
+  	<div id="imgsize">
+  		<img src="{{ cur_item.item_logo.url }}" class="img-responsive">
+  	</div>
+    <p class="uppercase">Name: <b>{{cur_item.item_name}}</b><br></p>
+    <p class="uppercase">Item ID: <b>{{cur_item.item_id}}</b><br></p>
+    <p class="uppercase">Seller: <b>{{cur_item.seller}}</b><br></p>
+    <p class="uppercase">Created On: <b> {{cur_item.created_on}}</b><br></p>
+	<p class="uppercase">Current Highest Bidder: <b>{{cur_item.cur_highest_bidder}}</b><br></p>
+	<p class="uppercase">Current Highest Bid: <b>{{cur_item.cur_highest_bid}}</b><br></p>
+	<p class="uppercase">Minimum Price: <b>{{cur_item.min_price}}</b><br></p>
+	<p class="uppercase">Buy Now: <b>{{cur_item.buy_now_price}}</b><br></p>
+
+
+  </li>
+    </ul>
+    <!--div class="w3-col m8 w3-container">
         <ul>
 
             <ul>
@@ -28,12 +52,12 @@
                 <li>Minimum price: {{cur_item.min_price}}</li>
                 <li>Buy now: {{cur_item.buy_now_price}}</li>
 
-            </ul>
+            </ul-->
 
             <form action="{% url 'Browse:update' cur_item.item_id %}" method="POST">
             {% csrf_token %}
                 <input type="text" name="bid_value">
-                <button type="submit">SUBMIT BID</button>
+                <button type="submit" class ="w3-btn w3-center">SUBMIT BID</button>
             </form>
 
         </ul>
@@ -43,7 +67,6 @@
             {% for message in messages %}
                 alert("{{ message }}")
             {% endfor %}
-
         </script>
     {% endif %}
 

@@ -1,7 +1,7 @@
 
-{#% extends 'Browse/bootstrap.html' %#}
-{#% block item_active %#}<!--{{ request.user.username }}-->{#% endblock %#}
-{#% block body %#}
+{% extends 'Browse/bootstrap.html' %}
+{% block item_active %}active{% endblock %}
+{% block body %}
 
 
 
@@ -14,6 +14,15 @@
 <link rel="stylesheet" type="text/css" href="{% static 'Index/font.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'Index/font2.css' %}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 <style>
 ::-webkit-scrollbar {
     display: none;
@@ -82,55 +91,63 @@ body, html {
             </li>
         </ul>
     </div>
-    {% block heading %}
+
     <!-- First Parallax Image with Logo Text -->
     <div class="bgimg-1 w3-opacity w3-display-container">
         <div class="w3-display-middle" style="white-space:nowrap;">
             <span class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity">UPLOAD<span class="w3-hide-small">  ANTIQUES</span> </span>
         </div>
     </div>
-    {% endblock %}
+
 
     <!-- Container (Section) -->
     <div class="w3-row w3-padding-32 w3-section">
         <div class="w3-col m2 w3-container">
             <ul class="w3-card-16 w3-ul w3-hoverable">
                 <p>
-                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Index:dashboard' %}" style="text-decoration: none">My HomePage</a></li>
-                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Browse:displayItems' %}" style="text-decoration: none">Gallery</a></li>
-                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showBids' %}" style="text-decoration: none">My Bids</a></li>
-                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showBought' %}" style="text-decoration: none">My Bought</a></li>
-                    <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showListings' %}" style="text-decoration: none">My Listings</a></li>
-                    <li class="w3-padding-xlarge w3-center w3-deep-purple"><a href="{% url 'UploadItems:UploadItems' %}" style="text-decoration: none">Upload Items</a></li>
+                <li class="w3-padding-xlarge w3-center"><a href="{% url 'Index:dashboard' %}" style="text-decoration: none">My HomePage</a></li>
+                <li class="w3-padding-xlarge w3-center"><a href="{% url 'Browse:displayItems' %}" style="text-decoration: none">Gallery</a>
+                <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showBids' %}" style="text-decoration: none">My Bids</a></li>
+                <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showBought' %}" style="text-decoration: none">My Bought</a></li>
+                <li class="w3-padding-xlarge w3-center"><a href="{% url 'Bids:showListings' %}" style="text-decoration: none">My Listings</a></li>
+
+                <li class="w3-padding-xlarge w3-center w3-deep-purple"><a href="{% url 'UploadItems:UploadItems' %}" style="text-decoration: none">Upload Antiques</a></li>
                 </p>
             </ul>
         </div>
         <div class="w3-col m8 w3-container">
             <div class=" container-fluid">
 
-            {% block body %}
                 <!-- Albums -->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-7">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        {% include 'UploadItems/formTemplate.html' %}
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-success">Submit</button>
-                                            </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-7">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal" align="center" role="form" action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <p><center><input class="w3-input-group w3-input " type="text" name="item_name" placeholder="Item Name" style="width:60%" required><br>
+                                    </p>
+                                    <p><center><input class="w3-input-group w3-input " type="textbox" name="item_desc" placeholder="Item Description" style="width:60%" required><br>
+                                    </p>
+                                    <p><center><input class="w3-input-group w3-input " type="number" name="min_price" placeholder="Minimum Bid Price" style="width:60%" required><br>
+                                    </p>
+                                    <p><center><input class="w3-input-group w3-input " type="number" name="buy_now_price" placeholder="Buy Now Price" style="width:60%" required><br>
+                                    </p>
+                                    <p><center><input class="w3-input-group w3-input " type="text" id="datepicker" name="expiration" placeholder="Expires On" style="width:60%" required><br>
+                                    </p>
+                                    <p><center><input class="w3-input-group w3-input " type="file" name="item_logo" placeholder="Item Logo" style="width:60%" required><br>
+                                    </p>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-success">Submit</button>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endblock %}
-
             </div>
         </div>
     </div>
@@ -138,4 +155,4 @@ body, html {
 </body>
 </html>
 
-{#% endblock %#}
+{% endblock %}

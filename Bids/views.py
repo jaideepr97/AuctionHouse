@@ -27,7 +27,7 @@ def showBids(request):
         'items': items
     }
 
-    return render(request, 'Bids/bidItems.html', context)
+    return render(request, 'Bids/active_bids.html', context)
 
 
 def showBought(request):

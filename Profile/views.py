@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth import get_user_model
 # Create your views here.
-
+User = get_user_model()
 
 def profilepage(request, username):
+    cur_user = User.objects.get(username=username)
     #user_name = request.user.first_name
     #print(User.username)
     context = {
-    #    "first_name": first_name,
-        "username": username,
-    #    "email": email,
+        "first_name": cur_user.first_name,
+        "username": cur_user.username,
+        "email": cur_user.email,
     }
     return render(request, 'Profile/profile.html', context)
 

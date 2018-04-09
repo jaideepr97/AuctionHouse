@@ -13,6 +13,7 @@
 <script src="/js/my.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" type="text/css" href="{% static 'Index/w3.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'Index/font.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'Index/font2.css' %}">
@@ -94,7 +95,7 @@ body, html {
     <!-- First Parallax Image with Logo Text -->
     <div class="bgimg-1 w3-opacity w3-display-container">
         <div class="w3-display-middle" style="white-space:nowrap;">
-            <span class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity">MY<span class="w3-hide-small">  HOME</span> </span>
+            <span class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity"><span class="w3-hide-small">SELLER</span> </span>
         </div>
     </div>
 
@@ -116,36 +117,35 @@ body, html {
         <div class="w3-col m8 w3-container">
             <div class=" container-fluid">
 
+  <div class="w3-col m2 w3-container w3-section">
+  </div>
+  <div class="w3-col m4 w3-container w3-section">
+    <ul class="w3-card-16 w3-ul">
+        <li class="w3-padding-large">
+            <h3><i>Seller Profile</i></h3>
+        </li>
+    <li class="w3-padding-large">
+        <p class="uppercase">Name: <b>{{first_name}}</b><br></p>
+        <p class="uppercase">User Name: <b>{{username}}</b><br></p>
+        <p class="uppercase">E - Mail: <b>{{email}}</b><br></p>
+    </li>
+    </ul>
                 <!-- Albums -->
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3> Profile </h3>
+                      
                     </div>
                     <ul>
-            
-						<li>Name: {{first_name}}</li>
-						<li>User Name: {{username}}</li>
-                        <li>Email: {{email}}</li>
-
 
                         <br>
                         <br>
-                        <button type="button" value="Chat" class="w3-btn w3-left" onclick="location=">Chat with Seller</button>
 
 
-
-                            <button type="button" value="Chat" class="w3-btn w3-right" onclick="location=">Submit</button>
-
-
-                        <br>
-                        <br>
-                        <br>
-                       
                         <div class="stars">
-                         <form action="{% url 'Profile:rating' %}" method="POST">
+                         <form action="{% url 'Index:dashboard' %}" method="POST">
                              {% csrf_token %}
-                             <input class="star star-5" id="star-5" type="radio" name="star5" value="5"/>
-                            <label class="star star-5" for="star-5"></label>
+                            <!--input class="star star-5" id="star-5" type="radio" name="star5" value="5"/>
+                            <label class="star star-5" for="star-5"></label-->
                             <input class="star star-4" id="star-4" type="radio" name="star4" value="4"/>
                             <label class="star star-4" for="star-4"></label>
                             <input class="star star-3" id="star-3" type="radio" name="star3" value="3"/>
@@ -153,8 +153,9 @@ body, html {
                             <input class="star star-2" id="star-2" type="radio" name="star2" value="2"/>
                             <label class="star star-2" for="star-2"></label>
                             <input class="star star-1" id="star-1" type="radio" name="star1" value="1"/>
-                            <label class="star star-1" for="star-1"></label>
-                             <button type="Submit" value="submit" class="w3-btn w3-right">Submit</button>
+                            <label class="star star-1" for="star-1"></label><br>
+
+                            <button type="Submit" value="submit" class="w3-btn w3-left">Submit</button>
 
                         </form>
                         </div>
@@ -170,8 +171,6 @@ body, html {
     <!--<script>
         function updateRating(){
             var data = {'rating': rating};
-
-
 
             $.ajax({
                 type: 'POST',
